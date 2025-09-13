@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Drive Logger — Setup</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; }
+      .row { margin-bottom: 14px; }
+      button { padding:10px 14px; cursor:pointer; border-radius:10px; border: 1px solid #ccc; background: #fafafa; }
+      button:hover { background: #f0f0f0; }
+      input[type=text] { width: 540px; max-width: 100%; padding:10px; border-radius:10px; border: 1px solid #ccc; }
+      code.uri { display:inline-block; padding:8px 10px; border-radius:10px; background:#f6f7f9; border:1px solid #e2e5ea; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .uri-box { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+      .badge { display:inline-block; padding:4px 8px; border-radius:999px; background:#eef6ff; color:#1452d1; font-weight:600; border:1px solid #d7e7ff; }
+      .status { font-weight:600; }
+      .ok { color:#0a7c2f; }
+      .err { color:#b00020; }
+      small { color:#6b7280; }
+      hr { border:none; border-top: 1px solid #e5e7eb; margin: 16px 0; }
+      .muted { color:#6b7280; }
+      .stack { display:flex; flex-direction:column; gap:6px; }
+    </style>
+  </head>
+  <body>
+    <h1>ChatGPT → Google Drive Logger (BYO OAuth)</h1>
+
+    <div class="row stack">
+      <span class="badge">1) Add this Redirect URI to your Google OAuth Client</span>
+      <div class="uri-box">
+        <code id="redirect" class="uri">loading…</code>
+        <button id="copyRedirect">Copy</button>
+      </div>
+      <small>In Google Cloud Console → <strong>APIs & Services → Credentials → OAuth 2.0 Client IDs → Edit</strong> → add the Redirect URI above verbatim.</small>
+    </div>
+
+    <hr/>
+
+    <div class="row stack">
+      <span class="badge">2) Paste your OAuth <em>Client ID</em> (Web application)</span>
+      <input id="cid" type="text" placeholder="YOUR_CLIENT_ID.apps.googleusercontent.com" />
+      <span class="badge">Optional: Client Secret (stored locally)</span>
+      <input id="secret" type="text" placeholder="(optional) CLIENT_SECRET" />
+      <div class="row">
+        <button id="save">Save Client ID</button>
+        <button id="signin">Sign in to Google</button>
+      </div>
+      <small class="muted">Tip: Client ID ends with <code>.apps.googleusercontent.com</code></small>
+    </div>
+
+    <div id="status" class="row status"></div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
